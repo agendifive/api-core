@@ -1,16 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
 
-func sum(a int, b int) int {
-	return a + b
-}
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
+	router := gin.Default()
 
-	a := 1
-	b := 2
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Hola Mundo",
+		})
+	})
 
-	rs := sum(a, b)
-	fmt.Printf("%v + %v = %v\n", a, b, rs)
+	router.Run("localhost:8080")
 }
